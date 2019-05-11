@@ -1,0 +1,5 @@
+dependencies {
+	compile(
+		project(':x-engine-frame')
+	)
+}

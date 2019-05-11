@@ -1,0 +1,9 @@
+include 'x-engine-frame','x-engine-commons','x-engine-gate','x-engine-roomserver','x-engine-server'
+
+project(':x-engine-commons').projectDir = "../x-engine/x-engine-commons" as File
+
+project(':x-engine-frame').projectDir = "../x-engine/x-engine-frame" as File
+
+project(':x-engine-gate').projectDir = "../x-engine/x-engine-gate" as File
+
+project(':x-engine-roomserver').projectDir = "../x-engine/x-engine-roomserver" as File

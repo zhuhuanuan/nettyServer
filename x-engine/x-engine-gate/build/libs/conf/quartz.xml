@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--定时器参数说明:
+    	秒 0-59 , - * /
+		分 0-59 , - * /
+		小时 0-23 , - * /
+		日 1-31 , - * ? / L W C
+		月 1-12 or JAN-DEC , - * /
+		周几 1-7 or SUN-SAT , - * ? / L C #
+		年 (可选字段) empty, 1970-2099 , - * /
+	-->
+
+</beans>

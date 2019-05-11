@@ -1,0 +1,14 @@
+dependencies {
+	compile(
+		project(':x-engine-roomserver')
+	)
+}
+
+jar {
+	String someString = '. ./conf/'
+	configurations.runtime.each {someString = someString + " lib//"+it.name}
+	manifest {
+		attributes 'Main-Class': 'com.xengine.game.app.Server'
+		attributes 'Class-Path': someString
+	}
+}

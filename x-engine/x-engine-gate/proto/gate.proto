@@ -1,0 +1,31 @@
+syntax = "proto3";
+option java_package = "com.xengine.gate.protoc";
+option java_outer_classname = "GateMsg";
+
+//40001 心跳请求
+message C2SHeartbeat {
+}
+
+//40001 心跳响应
+message S2CHeartbeat {
+	fixed64 time = 1; 	// 当前服务器时间
+}
+
+//登录
+message C2SLogin{
+	fixed64 userId 	 = 1;  						//用户ID，在平台登录的时候获得
+	string token	 = 2;   					//token
+	string deviceId = 3; 						//设备id
+	int32 gametype	=4;							//游戏类型
+}
+
+//登录成功才返回
+message S2CLogin{
+	fixed64 userId   = 1;  //用户ID，在平台登录的时候获得
+	fixed64 time     = 2;	// 当前系统时间
+}
+
+//40035 踢下线
+message S2KickOutNotify {
+
+}

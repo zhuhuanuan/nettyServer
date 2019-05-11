@@ -1,0 +1,84 @@
+syntax = "proto3";
+option java_package = "com.xengine.commons.protoc";
+option java_outer_classname = "CountProto";
+
+//**************************************推送统计数据到代理网关服
+//70001 测试
+message TestR2G{
+	int32 tes=1;
+	
+}
+
+//统计玩家登陆登出游戏类型  统计
+message LoginStateR2G{
+	fixed64 userId = 1;  //用户ID，在平台登录的时候获得
+	string channelId = 2;    //渠道Id
+	int32 gameId = 3;       //游戏类型
+	int32 type = 4;         //1登录2登出
+}
+//统计创建房间
+message CreatRoomR2G{
+	fixed64 userId = 1;  //用户ID，在平台登录的时候获得
+	string channelId = 2;    //渠道Id
+	int32 gameId = 3;       //游戏类型
+	fixed64 roomId = 4;     //房间ID
+}
+//统计金币变动信息
+message GoldIncomeR2G{
+	string channelId = 1;    //渠道Id
+	int32 gameType = 2;      //游戏类型
+ 	int32 rate=3;			 //倍率
+ 	int64 roomId =4;		 //房间id
+ 	int64 toUserId=5;		 //去向id
+ 	int64 before=6;			 //变动之前的金额
+ 	int64 count=7;			 //变动金额（负数）
+ 	int64 afterCount=8;		 //变动之后玩家的金额
+ 	int64 userId=9;			 //玩家的id	
+ 	int32 changeType=10;	 //消费类型：1.充值，2.存入金币 ，3.取出金币 ，4.添加金币后台操作 5.扣除金币，6.领取奖励,8 抽水,9金币输赢(匹配场),10 金币输赢（组局场）	
+}
+
+//统计游戏类型人数
+message GoldPeopleR2G{
+	string channelId = 1;    //渠道Id
+	int32 gameType = 2;       //游戏类型
+ 	int32 rate=3;			//倍率
+ 	int64 playerId=4;		//玩家的id
+}
+//统计游戏局数  游戏发牌的时候增加
+message GoldRoundR2G{
+	string channelId = 1;    //渠道Id
+	int32 gameType = 2;       //游戏类型
+ 	int32 rate=3;			//倍率
+}
+//统计业绩
+message MonthlyInfo{
+	int32 count =1;
+	int32 gameType=2;
+	int64 userId=3;
+}
+
+//系统抽水和系统盈亏情况
+message SysGold{
+	string channelId = 1;    //渠道Id
+	int32 gameType = 2;       //游戏类型
+ 	int32 rate=3;			//倍率
+ 	int64 gold=4;			//抽水费
+ 	int64 sysGold=5;		//系统亏损金额
+ 	int64 roomId =6;		// 房间id
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

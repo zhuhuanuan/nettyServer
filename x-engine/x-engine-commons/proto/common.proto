@@ -1,0 +1,70 @@
+syntax = "proto3";
+option java_package = "com.xengine.commons.protoc";
+option java_outer_classname = "CommonMsg";
+
+message R2GFinshRoom{//通知代理服房间结束
+
+}
+
+message S2CCommontMsg { //通用结果server回复数据包定义,S->C cmd = COMMON_RESULT =3001
+	int32 cmdCode = 1; //操作的协议号
+	int32 result = 2; //结果值, 0=成功 其他=各种失败错误码
+	string resultInfo = 3; //result=各种失败时,返回对应错误信息
+}
+
+
+message C2RSLogout{//由gate-server发起 玩家退出通知房间服 cmd = LOGOUT_ROOM 		    = 3002
+}
+
+/**40007 加入房间*/
+message C2SJoinRoom{
+	fixed64 roomId = 1;//房间ID
+}
+
+/**40008 获取房间、玩家信息(断线重连后可以直接请求该协议获取房间、玩家信息) */
+message C2SRoomData{
+	fixed64 roomId = 1;//房间ID
+}
+
+/**40012 聊天请求 */
+message C2SChat{
+	int32 id = 1;//聊天内容ID，读配置表
+	fixed64 roomId =2;//房间ID
+}
+
+/**聊天回复 */
+message S2CChat{
+	fixed64 playerId = 1;//玩家ID
+	int32 id = 2;//聊天内容
+	int32 sex = 3;//性别 1 男性 2 女性 0 未知
+}
+
+/** 40015 请求观战*/
+message C2SWatch {
+	fixed64 roomId = 1;// 房间ID
+}
+
+/** 40029 观战者加入房间 请求*/
+message C2SWatcherJoinRoom {
+	fixed64 roomId = 1;// 房间ID
+}
+
+/**40017 退出房间请求 */
+message C2SExitRoom{
+	fixed64 roomId = 1;// 房间ID
+}
+
+
+/*  40017 退出房间响应 */
+message S2CExitRoom {
+	fixed64 playerId = 1;
+	int32 state = 2;							// 0 退出失败  1 退出成功
+}
+
+/**40026 分享房间信息 */
+message C2SShareRoom{
+	fixed64 roomId = 1;//房间ID
+}
+
+
+

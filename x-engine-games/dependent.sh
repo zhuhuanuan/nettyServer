@@ -1,0 +1,2 @@
+#gradle idea
+gradle eclipse

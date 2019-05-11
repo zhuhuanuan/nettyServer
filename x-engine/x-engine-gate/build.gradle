@@ -1,0 +1,14 @@
+dependencies {
+	compile(
+		project(':x-engine-frame'),
+	)
+}
+
+jar {
+	String someString = '. ./conf/'
+	configurations.runtime.each {someString = someString + " lib//"+it.name}
+	manifest {
+		attributes 'Main-Class': 'com.xengine.gate.app.ClientServer'
+		attributes 'Class-Path': someString
+	}
+}

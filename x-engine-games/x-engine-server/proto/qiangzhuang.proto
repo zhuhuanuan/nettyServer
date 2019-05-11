@@ -1,0 +1,332 @@
+syntax = "proto3";
+option java_package = "com.xengine.game.protoc";
+option java_outer_classname = "ProtoMsg";
+
+/**40006 创建房间 */
+message QCreateRoomC2S{
+	int32 Lv = 1;//创建房间的等级 1：初级 2：中级 3： 高级 4： 土豪场 
+	int32 model =2;//模式 1： 明牌抢庄
+}
+
+/** 40006 创建房间响应 */
+message QCreateRoomS2C {
+	fixed64 roomId = 1;							// 房间ID
+	int64 roomNumber=2 ;						// 房间号 
+	int32 mode = 3; 							// 游戏模式 1：明牌抢庄 
+}
+
+/** 40007 加入房间  */
+message QJoinRoomC2S{	
+	
+}
+
+/**40007 加入房间响应 */
+message QJoinRoomS2C{
+	bool judge = 1;//  成功 true 失败 false
+	fixed64 roomId = 2;//房间ID
+	int32 gameType = 3;//游戏类型 11：抢庄金币牛牛 
+	bool match=4;		//是否是匹配场
+}
+
+/**40008 获取房间信息 */
+message QRoomInfoC2S{
+	
+}
+
+/**40008 获取房间信息 返回 */
+message QRoomInfoS2C {
+	fixed64 roomId = 1;							// 房间ID
+	int64 roomNumber=2 ;						// 房间号 
+	int32 mode = 3; 							// 游戏模式 1：明牌抢庄 2 ： 明牌开船
+	int32 capacity = 4;							// 人数
+	bool match =5;								// 是否是匹配场 1 是 2 否
+	int32 baseBet =6;							// 低注
+	int32 watch = 7;							// 是否允许观战 0 不允许 1 允许	
+	int32 state = 8;							// 房间的状态  
+	int64 delayTime = 9;  						// 状态时间 
+	int32 lv=10;								// 房间等级 1.新手场 2......
+	int64 leastGold=11;							// 准入金币(明牌金币模式才有)
+	int64 moreCore=12;							// 最大下注數(明牌金币模式才有)
+	int64 minCore=13;							// 最小下注數(明牌金币模式才有)
+	int64 goBankerCore=14;						// 坐庄最小数
+	int64 allBet=15;							// 全部的下注总和	
+	repeated QPlayerInfo infos = 16;	    	// 房间成员的信息
+	bool dealPoker =17;							// 房间是否已经发牌
+}
+
+//玩家准备 40009
+message QReadyC2S{
+
+}
+//准备推送 41005
+message QReadyPush{
+	fixed64 playerId = 1;						// id
+}
+
+//玩家抢庄 40010
+message QBankerC2S{
+	int32 bankerScore=1;//抢庄倍数或分数  0 不抢 1 抢
+}
+
+//抢庄推送  41006
+message QBankerPush{
+	fixed64 playerId = 1;						// id
+	int32 bankerScore=2;//抢庄倍数或分数  0 不抢 1 抢
+}
+
+//玩家下注 40011
+message QBetC2S{
+	int64 bet = 1;								//下注金额
+}
+
+//玩家下注推送 41007
+message QBetPush{
+	fixed64 playerId = 1;						// id
+	int64 bet = 2;								//下注金额
+}
+ 
+//玩家 坐下 40012
+message QSitDownC2S{
+
+}
+
+//玩家坐下  返回 40012
+message QSitDownS2C{
+	bool ok=1;//是否成功坐下
+}
+
+//玩家离开座位 加入观战队列 40013
+message QStandUpC2S{
+	
+}
+
+//玩家离开座位  加入观战队列  40013
+message QStandUpS2C{
+	int32 ok=1;// 1： 玩家成功加入观战  2：玩家回合结束离开座位 3 .玩家取消离座 4 ：3次离开座位  5:3次踢出房间 6：玩家金币不足准入金请离座位  7：玩家金币不足踢出房间
+}
+
+//玩家自动准备 40014
+message QAutoReadyC2S{
+
+}
+//玩家自动准备 40014
+message QAutoReadyS2C{
+	bool auto=1;//玩家自动准备的状态  true 自动准备  false 非自动准备
+}
+
+//40015 玩家搓牌
+message QCuoPokerC2S{
+	int32 cuoType=1;//搓牌类型 1：非牌背 2：点击牌背
+} 
+//40015 玩家搓牌返回
+message QCuoPokerS2C{
+	repeated QPoker cards	=1;		// 玩家手牌
+	int32 typeId=2;				// 牌型id 
+	int32 cuoType=3;//搓牌类型 1：非牌背 2：点击牌背
+}
+//40016 玩家摊牌 (41010 玩家摊牌推送)
+message QOpenPokerC2S{
+
+}
+//41010 玩家摊牌推送
+message QOpenPokerPush{
+	fixed64 playerId  =  1;  // 玩家id
+	int32 typeId=2;										//牌型id
+	repeated QPoker pokers =3;							// 玩家的扑克牌 
+}
+//40017 加入匹配队列 ( 41012 匹配房间id推送 )
+message QMatchC2S{
+	int32 lv =1;//匹配级别  1：初级场 2：中级场 3：高级场  4：土豪场 
+	int32 model =2;// 游戏模式 1 明牌抢庄  2   明牌开船
+	int32 gameType =3;//游戏类型  8 金币牛牛
+}
+//40017 加入匹配队列返回
+message QMatchS2C{
+ 	bool match=1;// true 加入队列成功！ false 加入队列失败
+}
+
+//40018 玩家快速加入匹配队列
+message QSupMatchC2S{
+	int32 model =1;// 游戏模式 1 明牌抢庄  2   明牌开船
+	int32 gameType =2;//游戏类型  11 抢庄牛牛
+}
+//40018 玩家快速加入匹配队列
+message QSupMatchS2C{
+	bool supMatch =1;//是否加入匹配队列 true 加入成功  false 加入失败
+}
+
+//40019 玩家换桌
+message QChangeRoomC2S{
+	fixed64 roomId = 1;						   // 房间ID 
+}
+
+//40019 玩家换桌返回 (等待 匹配房间id的推送)
+message QChangeRoomS2C{
+	bool change = 1;						   // 是否换桌成功
+}
+
+//40020 玩家聊天
+message QChatC2S{
+	int32 id=1;//聊天内容
+}
+
+//40021 GM操作
+message QGmC2S{
+	string cardIndex = 1; 						// 牌的索引，用,隔开
+	int32 type =2;								// gm操作类型        1 发牌 2 加减金币
+	int32 gold=3;								// 加减金币  存在正负
+}
+message QGmS2C{
+	bool gm=1;									//是否操作成功
+}
+
+
+
+//房间玩家的基本信息 (  41002 玩家加入房间 其他玩家会收到推送 )
+message QPlayerInfo{
+	fixed64 playerId = 1;						// id
+	int32 position = 2;							// 座位索引
+	string icon = 3;							// 头像
+	string nickname = 4;						// 昵称
+	int64 score = 5;							// 玩家携带的金币数量
+	bool autoReady = 6;							// 玩家自动准备
+	bool online=7;								// 玩家是否在线
+	bool ready=8;								// 玩家是否准备
+	bool isbanker=9;							// 玩家是否是庄家
+	int32 bankerScore=10;						// 玩家抢庄倍数  -1 没有参与  0 不抢 1 抢庄
+	int64 betScore=11;							// 玩家下注金币   0 没有下注 
+	int32 sex =12;								// 性别 1 男 2 女 0 未知	
+	repeated QPoker handCard =13;				// 玩家手牌 
+	int32 typeId=14;							// 玩家的牌型id 如果玩家确定了牌型id 则有  否则没有
+	bool getCard = 15;							// 是否有手牌
+	bool openCard =16;							// 玩家是否摊牌
+	bool cuoPoker =17;							// 玩家是否搓牌
+}
+
+//扑克牌
+message QPoker{
+	int32 id=1;									//牌id
+}
+
+//41001 房间状态的推送
+message QRoomStatePush{
+	fixed64 roomId = 1; // 房间id
+	int32 state=2;//房间的状态 
+	int64 delayTime=3;//房间状态时间 超过这个时间 房间进入下一状态 注意：准备阶段没有时间限制
+}
+// 41003 房间解散推送
+message QDeleteRoomPush {
+	fixed64 roomId = 1;							// 房间号
+}
+
+//41004 玩家的状态推送
+message QPlayerStatePush{
+	fixed64 playerId 	=1;   	// 玩家id
+	bool online			=2;		// 玩家是否在线
+	bool clear			=3;		// 是否清除玩家的数据信息
+}
+
+//发牌推送 41008
+message QDealPush{
+	repeated DealPlayer dealPlayer=1;//发牌的玩家数组
+}
+//提示推送 41009
+message QTipsPush{
+	int32 type=1;//提示 1：无人参与抢庄，重新开始抢庄  2：无人参与抢庄，房间解散
+}
+// 41011 房间的单局结算推送
+message QRoundSettlePush{
+	int32 mode=1;//房间的模式 1 ：明牌抢庄 2：明牌开船
+	repeated QRoundPlayer roundPlayer=2;
+	fixed64 bankerId =3;//庄家的id
+	
+}
+//41012  匹配信息推送
+message QMatchPush{
+	fixed64 roomId = 1; 						// 房间id
+	int32 gameType =2;							// 游戏类型  ：11  抢庄牛牛
+}
+
+//41013 庄家选取推送  
+message QBankersPush {
+	string playerIds = 1; //参与选取庄家的玩家id
+	fixed64 bankerId = 2;//庄家的id
+	int32 bankerScore =3;//庄家的倍数
+	repeated QPlayerBankerBet playerBankerBet = 4 ;//玩家抢庄信息
+}
+//玩家抢庄倍数信息  推送庄家的时候配置
+message QPlayerBankerBet{
+		fixed64 playerId  =  1;  // 玩家id
+		int32 bankerScore =2;	 //玩家抢庄的倍数
+}
+//发牌的玩家
+message DealPlayer {
+	fixed64 playerId = 1;						// 玩家的id
+	repeated QPoker poker =2;					// 玩家的扑克牌 
+	int32 position = 3;							// 座位索引
+}
+
+//单局结算玩家的数据信息
+message QRoundPlayer{
+	fixed64 playerId 	 	=   1;   // 玩家的id
+	int64 score 		 	=   2;	// 玩家总的积分
+	int64 curScore		 	=   3;	// 当前玩家赢的积分数量 存在正负数
+	repeated QPoker cards	=	4;		// 玩家手牌
+	int32 cardType			=	5;		//  玩家的牌型id
+	int32 position			=	6;		// 玩家的座位号
+}
+
+//41014 聊天推送
+message QChatPush{
+	int64 playerId = 1;
+	int32 id = 2; 								// 聊天内容
+	int32 sex =3;								// 性别 1 男性 2 女性 0 未知
+}
+
+
+
+/**40026 分享房间信息 */
+message QShareRoomC2S{
+	fixed64 roomId = 1;//房间ID
+}
+// 40026 分享房间信息
+message QShareRoomS2C {
+	QRoomBaseInfo roomBaseInfo = 1;   // 房间信息
+	repeated QSPlayerInfo playerInfo = 2;	// 房间成员的信息
+	bool  isWhether = 3;					  // 玩家是否在房间 false不再 true在
+}
+
+
+//  玩家信息
+message QSPlayerInfo {
+	fixed64 playerId = 1;
+	string icon = 2;						  // 头像
+	string nickname = 3;					  // 昵称
+	int64 score = 4;						  // 积分
+	int32 state = 5;						  // 玩家状态 0：未准备 1已准备 2:游戏中  3：离线 
+	int32 sex = 6;							  // 性别 1 男 2 女 
+	bool  isProceed = 7;					  // 玩家是否出拳 false没有  true有
+	int32 type = 8;				              // 玩家当前出拳的类型  1：石头  2：剪刀  3：布
+	int32 position = 9;				          // 玩家在房间中的位置
+	bool   judge = 10;				          // 识别是否显示出拳界面和出拳按钮 false显示 true不显示
+	string borderUrl = 11;				      // 玩家的vip头像框
+}
+
+//  房间基础信息
+message QRoomBaseInfo {
+    fixed64 roomId = 1;				// 房间ID
+    int64   roomNumber=2 ;			// 房间号 
+	int32   chip = 3; 			     // 房间底注
+    int32 multiple = 4; 		    // 倍数
+    int32 gameType = 5;				// 游戏类型 1 牛牛 2炸金花 4牌九 5二八杠 6  猜拳	
+    int32 state = 6;				// 房间状态  0准备 1游戏中  2结算
+    int32  capacity =7;			    // 总人数
+    int32  current=8;				// 当前人数
+    int32 base=9;					//房间底注
+    int64 maxBet=10;				//房间最大下注数
+    int64 minBet=11;				//房间最小下注数
+    int64 bankerScore=12;			//房间的坐庄金币
+    int32 lv=13;					//房间的等级
+    int64 leastGold=14;				//准入金
+    
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+    	<properties alwaysScanHu="true"/>
+		<!-- 牛牛 -->
+	    <rule type="牛牛" name="排序" id="9999" rate="999">
+		   牌序组合=牛牛排序(手牌);牌序组合.size() 等于 -1
+    	</rule>
+	    <rule type="牛牛" name="五小牛" id="20" rate="10">
+		 五小牛(牌序组合)
+    	</rule>
+	    <rule type="牛牛" name="炸弹牛" id="19" rate="8">
+		炸弹牛(牌序组合)
+    	</rule>
+	    <rule type="牛牛" name="葫芦牛" id="18" rate="7">
+		 葫芦牛(牌序组合)
+    	</rule>
+	    <rule type="牛牛" name="同花牛" id="17" rate="6">
+		 同花牛(牌序组合)
+    	</rule>
+	    <rule type="牛牛" name="五花牛" id="16" rate="6">
+		 五花牛(牌序组合)
+    	</rule>
+	    <rule type="牛牛" name="顺子牛" id="15" rate="5">
+		 顺子牛(牌序组合)
+    	</rule>
+	    <rule type="牛牛" name="牛牛" id="14" rate="4">
+		牛几= 牛点数(牌序组合);牛几 等于 10
+    	</rule>
+	    <rule type="牛牛" name="牛牛" id="13" rate="3">
+		牛几= 牛点数(牌序组合);牛几 等于 10
+    	</rule>
+	    <rule type="牛牛" name="牛9" id="12" rate="3">
+		牛几 等于 9
+    	</rule>
+	    <rule type="牛牛" name="牛9" id="11" rate="2">
+		牛几 等于 9
+    	</rule>
+	    <rule type="牛牛" name="牛8" id="10" rate="3">
+		牛几 等于 8
+    	</rule>
+	    <rule type="牛牛" name="牛8" id="9" rate="2">
+		牛几 等于 8
+    	</rule>
+	    <rule type="牛牛" name="牛7" id="8" rate="2">
+		牛几 等于 7
+    	</rule>
+	    <rule type="牛牛" name="牛7" id="7" rate="1">
+		牛几 等于 7
+    	</rule>
+	    <rule type="牛牛" name="牛6" id="6" rate="1">
+		牛几 等于 6
+    	</rule>
+	    <rule type="牛牛" name="牛5" id="5" rate="1">
+		牛几 等于 5
+    	</rule>
+	    <rule type="牛牛" name="牛4" id="4" rate="1">
+		牛几 等于 4
+    	</rule>
+	    <rule type="牛牛" name="牛3" id="3" rate="1">
+		牛几 等于 3
+    	</rule>
+	    <rule type="牛牛" name="牛2" id="2" rate="1">
+		牛几 等于 2
+    	</rule>
+	    <rule type="牛牛" name="牛1" id="1" rate="1">
+		牛几 等于 1
+    	</rule>
+	    <rule type="牛牛" name="无牛" id="0" rate="1">
+		牛几 等于 0
+    	</rule>
+	   
+	   
+	  	 <rule type="庄家牛" name="排序" id="105" rate="999">
+		   庄家牛牌序组合=牛牛排序(手牌);牌序组合.size() 等于 -1
+    	</rule>
+    	<rule type="庄家牛" name="五花牛" id="104" rate="1">
+		庄家五花牛(庄家牛牌序组合)
+    	</rule>
+    	<rule type="庄家牛" name="炸弹牛" id="103" rate="1">
+		庄家炸弹牛(庄家牛牌序组合)
+    	</rule>
+    	<rule type="庄家牛" name="有牛" id="102" rate="1">
+		是否牛=庄家牛点数(庄家牛牌序组合); 是否牛 等于 true
+    	</rule>
+	  	<rule type="庄家牛" name="无牛" id="101" rate="1">
+		是否牛 等于 false
+    	</rule>
+	
+	
+	  
+    	
+    	
+</rules>
